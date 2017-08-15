@@ -34,6 +34,12 @@ public class Product {
 	@Column(name = "ID")
 	private Long id;
 	
+	@Column(name = "NAME", unique = true, nullable = false)
+	private String name;
+	
+	@Column(name = "STOCK", unique = false, nullable = false)
+	private Long stock;
+	
 	@OneToOne
 	@JoinColumn(name = "DETAILS_ID")
 	public ProductDetails productDetails;

@@ -33,9 +33,6 @@ public class ProductDetails {
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "productDetails", cascade = CascadeType.ALL)
 	private Product product;  
 	
-	@Column(name = "NAME", unique = true, nullable = false)
-	private String name;
-
 	@Column(name = "COUNTRY_OF_ORIGIN", unique = false, nullable = false)
 	private String countryOfOrigin;
 	
@@ -50,9 +47,6 @@ public class ProductDetails {
 	
 	@Column(name = "EXPIRY_DATE", unique = false, nullable = true)
 	private LocalDate expiryDate;
-	
-	@Column(name = "STOCK", unique = false, nullable = false)
-	private Long stock;
 	
 	@Column(name = "IMAGE", unique = false, nullable = true)
 	private byte[] image;

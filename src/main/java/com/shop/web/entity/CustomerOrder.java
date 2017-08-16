@@ -17,12 +17,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
 
 
-@Data
+@Getter
 @Wither
 @NoArgsConstructor
 @AllArgsConstructor

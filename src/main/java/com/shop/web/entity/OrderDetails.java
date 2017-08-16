@@ -12,11 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
 
-@Data
+@Getter
 @Wither
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,16 +28,16 @@ public class OrderDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name="ORDER_ID")
+	@JoinColumn(name = "ORDER_ID")
 	private CustomerOrder order;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name="PRODUCT_ID")
+	@JoinColumn(name = "PRODUCT_ID")
 	private Product product;
-	
+
 	@Column(name = "AMOUNT", unique = false, nullable = false)
 	private Integer amount;
-	
+
 }

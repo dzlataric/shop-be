@@ -5,16 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
 
-@Data
+@Getter
 @Wither
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,12 +24,26 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@Column(name = "TYPE", unique = false, nullable = true)
 	private String type;
-	
-	@OneToOne
-	@JoinColumn(name = "DETAILS_ID")
-	public CustomerDetails customerDetails;
+
+	@Column(name = "FIRST_NAME", unique = false, nullable = false)
+	private String firstName;
+
+	@Column(name = "LAST_NAME", unique = false, nullable = false)
+	private String lastName;
+
+	@Column(name = "ADDRESS", unique = false, nullable = true)
+	private String address;
+
+	@Column(name = "CITY", unique = false, nullable = true)
+	private String city;
+
+	@Column(name = "COUNTRY", unique = false, nullable = true)
+	private String country;
+
+	@Column(name = "GENDER", unique = false, nullable = true)
+	private String gender;
 
 }

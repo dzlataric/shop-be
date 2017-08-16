@@ -1,5 +1,6 @@
 package com.shop.web.entity;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,15 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
 
-@Data
+@Getter
 @Wither
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,22 +33,36 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@Column(name = "NAME", unique = true, nullable = false)
 	private String name;
-	
+
 	@Column(name = "STOCK", unique = false, nullable = false)
 	private Long stock;
-	
-	@OneToOne
-	@JoinColumn(name = "DETAILS_ID")
-	public ProductDetails productDetails;
-	
+
+	@Column(name = "COUNTRY_OF_ORIGIN", unique = false, nullable = false)
+	private String countryOfOrigin;
+
+	@Column(name = "MANUFACTURER", unique = false, nullable = false)
+	private String manufacturer;
+
+	@Column(name = "PRICE", unique = false, nullable = false)
+	private Double price;
+
+	@Column(name = "PRODUCTION_YEAR", unique = false, nullable = false)
+	private Long productionYear;
+
+	@Column(name = "EXPIRY_DATE", unique = false, nullable = true)
+	private LocalDate expiryDate;
+
+	@Column(name = "IMAGE", unique = false, nullable = true)
+	private byte[] image;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY_ID", nullable = false)
 	private Category category;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<Review> reviews = new HashSet<Review>();
-	
+
 }

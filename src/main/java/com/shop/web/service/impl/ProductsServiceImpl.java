@@ -27,7 +27,8 @@ public class ProductsServiceImpl implements ProductsService {
 	public List<ProductDTO> getProducts() {
 		return productRepository.findAll().stream()
 				.map(product -> new ProductDTO(product.getId(), product.getName(), product.getStock(),
-						product.getProductDetails(), product.getCategory().getId(),
+						product.getCountryOfOrigin(), product.getManufacturer(), product.getPrice(),
+						product.getProductionYear(), product.getExpiryDate(), product.getCategory().getId(),
 						product.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet())))
 				.collect(Collectors.toList());
 	}
@@ -37,11 +38,14 @@ public class ProductsServiceImpl implements ProductsService {
 	public ProductDTO insert(ProductDTO productDTO) {
 		Product product = new Product().withName(productDTO.getName()).withStock(productDTO.getStock())
 				.withCategory(categoryRepository.findOne(productDTO.getCategoryId()))
-				.withProductDetails(productDTO.getDetails());
-		Product result = productRepository.save(product);
-		return new ProductDTO(result.getId(), result.getName(), result.getStock(), result.getProductDetails(),
-				result.getCategory().getId(),
-				result.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()));
+				.withCountryOfOrigin(productDTO.getCountryOfOrigin()).withManufacturer(productDTO.getManufacturer())
+				.withPrice(productDTO.getPrice()).withProductionYear(productDTO.getProductionYear())
+				.withExpiryDate(productDTO.getExpiryDate());
+		Product saved = productRepository.save(product);
+		return new ProductDTO(saved.getId(), saved.getName(), saved.getStock(), saved.getCountryOfOrigin(),
+				saved.getManufacturer(), saved.getPrice(), saved.getProductionYear(), saved.getExpiryDate(),
+				saved.getCategory().getId(),
+				saved.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()));
 	}
 
 	@Override
@@ -51,13 +55,16 @@ public class ProductsServiceImpl implements ProductsService {
 		if (toUpdate == null) {
 			throw new EntityNotFoundException("Product not found!");
 		}
-		Product result = productRepository.save(toUpdate.withName(productDTO.getName()).withStock(productDTO.getStock())
+		Product updated = productRepository.save(toUpdate.withId(id).withName(productDTO.getName()).withStock(productDTO.getStock())
 				.withCategory(categoryRepository.findOne(productDTO.getCategoryId()))
-				.withProductDetails(productDTO.getDetails()));
+				.withCountryOfOrigin(productDTO.getCountryOfOrigin()).withManufacturer(productDTO.getManufacturer())
+				.withPrice(productDTO.getPrice()).withProductionYear(productDTO.getProductionYear())
+				.withExpiryDate(productDTO.getExpiryDate()));
 
-		return new ProductDTO(result.getId(), result.getName(), result.getStock(), result.getProductDetails(),
-				result.getCategory().getId(),
-				result.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()));
+		return new ProductDTO(updated.getId(), updated.getName(), updated.getStock(), updated.getCountryOfOrigin(),
+				updated.getManufacturer(), updated.getPrice(), updated.getProductionYear(), updated.getExpiryDate(),
+				updated.getCategory().getId(),
+				updated.getReviews().stream().map(review -> review.getId()).collect(Collectors.toSet()));
 	}
 
 	@Override

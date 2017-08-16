@@ -1,10 +1,14 @@
 package com.shop.web.service;
 
-import com.shop.web.entity.Category;
+import java.util.List;
+
+import com.shop.web.service.dto.CategoryDTO;
 
 public interface CategoryService {
 
-	void insert(Category category);
+	List<CategoryDTO> getCategories();
+	
+	CategoryDTO insert(CategoryDTO categoryDTO);
 	
 	void delete(Long id);
 	

@@ -23,18 +23,18 @@ public class CustomersController {
 	private CustomerService customerService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	private ResponseEntity<CustomerDTO> createProduct(@RequestBody final CustomerDTO customer) {
+	private ResponseEntity<CustomerDTO> createCustomer(@RequestBody final CustomerDTO customer) {
 		return new ResponseEntity<CustomerDTO>(customerService.insert(customer), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	private ResponseEntity<CustomerDTO> updateProduct(@PathVariable(value = "id") final Long id,
+	private ResponseEntity<CustomerDTO> updateCustomer(@PathVariable(value = "id") final Long id,
 			@RequestBody final CustomerDTO customer) {
 		return new ResponseEntity<CustomerDTO>(customerService.update(id, customer), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	private ResponseEntity<String> deleteProduct(@PathVariable(value = "id") final Long id) {
+	private ResponseEntity<String> deleteCustomer(@PathVariable(value = "id") final Long id) {
 		customerService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

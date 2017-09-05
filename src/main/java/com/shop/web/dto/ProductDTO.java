@@ -1,7 +1,4 @@
-package com.shop.web.service.dto;
-
-import java.time.LocalDate;
-import java.util.Set;
+package com.shop.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,12 +12,9 @@ public class ProductDTO {
 	private Long id;
 	private String name;
 	private Long stock;
-	private String countryOfOrigin;
-	private String manufacturer;
 	private Double price;
-	private Long productionYear;
-	private LocalDate expiryDate;
+	private String category;
 	private Long categoryId;
-	private Set<Long> reviewIds;
-	
+	private Long detailsId;
+
 }

@@ -1,6 +1,6 @@
 package com.shop.web.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +21,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
 
-
 @Getter
 @Wither
 @NoArgsConstructor
@@ -34,14 +33,14 @@ public class CustomerOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@Column(name = "ORDER_DATE", unique = false, nullable = false)
-	private LocalDate orderDate;
-	
+	private Date orderDate;
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name="CUSTOMER_ID")
+	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 }

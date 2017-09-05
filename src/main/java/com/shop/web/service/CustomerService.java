@@ -1,12 +1,12 @@
 package com.shop.web.service;
 
-import com.shop.web.service.dto.CustomerDTO;
+import com.shop.web.dto.CustomerDTO;
 
 public interface CustomerService {
 	
-	CustomerDTO insert(CustomerDTO customerDTO);
+	void insert(CustomerDTO customerDTO);
 	
-	CustomerDTO update(Long id, CustomerDTO customerDTO);
+	void update(Long id, CustomerDTO customerDTO);
 	
 	void delete(Long id);
 

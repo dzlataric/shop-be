@@ -1,6 +1,6 @@
 package com.shop.web.service;
 
-import com.shop.web.service.dto.ReviewDTO;
+import com.shop.web.dto.ReviewDTO;
 
 public interface ReviewsService {
 

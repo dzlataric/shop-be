@@ -1,4 +1,4 @@
-package com.shop.web.service.dto;
+package com.shop.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,10 +1,7 @@
 package com.shop.web.entity;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +24,9 @@ import lombok.experimental.Wither;
 @AllArgsConstructor
 @Entity
 @Table(name = "PRODUCT")
-public class Product {
+public class Product implements Serializable {
+
+	private static final long serialVersionUID = -8351870708981966071L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,30 +38,15 @@ public class Product {
 
 	@Column(name = "STOCK", unique = false, nullable = false)
 	private Long stock;
-
-	@Column(name = "COUNTRY_OF_ORIGIN", unique = false, nullable = false)
-	private String countryOfOrigin;
-
-	@Column(name = "MANUFACTURER", unique = false, nullable = false)
-	private String manufacturer;
-
+	
 	@Column(name = "PRICE", unique = false, nullable = false)
 	private Double price;
-
-	@Column(name = "PRODUCTION_YEAR", unique = false, nullable = false)
-	private Long productionYear;
-
-	@Column(name = "EXPIRY_DATE", unique = false, nullable = true)
-	private LocalDate expiryDate;
-
-	@Column(name = "IMAGE", unique = false, nullable = true)
-	private byte[] image;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY_ID", nullable = false)
 	private Category category;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
-	private Set<Review> reviews = new HashSet<Review>();
-
+	@OneToOne
+	@JoinColumn(name = "DETAILS_ID")
+	private ProductDetails productDetails;
 }

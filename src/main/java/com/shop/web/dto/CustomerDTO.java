@@ -1,6 +1,4 @@
-package com.shop.web.service.dto;
-
-import com.shop.web.util.CustomerType;
+package com.shop.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +10,10 @@ import lombok.NoArgsConstructor;
 public class CustomerDTO {
 
 	private Long id;
+	private String username;
+	private String password;
 	private String firstName;
 	private String lastName;
-	private CustomerType type;
 	private String address;
 	private String city;
 	private String country;

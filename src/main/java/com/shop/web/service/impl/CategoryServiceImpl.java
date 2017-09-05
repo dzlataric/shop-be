@@ -5,12 +5,14 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.shop.web.dto.CategoryDTO;
 import com.shop.web.entity.Category;
 import com.shop.web.repository.CategoryRepository;
 import com.shop.web.service.CategoryService;
-import com.shop.web.service.dto.CategoryDTO;
+import com.shop.web.util.ObjectConversionUtil;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -19,17 +21,16 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public List<CategoryDTO> getCategories() {
-		return categoryRepository.findAll().stream()
-				.map(category -> new CategoryDTO(category.getId(), category.getTitle(), category.getDescription()))
+	public List<CategoryDTO> getCategories(final int page, final int pageSize, final String search) {
+		return categoryRepository.findAll().stream().skip((page - 1) * pageSize).limit(pageSize)
+				.filter(category -> StringUtils.containsIgnoreCase(category.getTitle(), search))
+				.map(category -> ObjectConversionUtil.convertCategoryToDTO(category))
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public CategoryDTO insert(CategoryDTO categoryDTO) {
-		Category category = new Category().withTitle(categoryDTO.getTitle())
-				.withDescription(categoryDTO.getDescription());
-		Category saved = categoryRepository.save(category);
+		Category saved = categoryRepository.save(ObjectConversionUtil.convertDTOToCategory(categoryDTO));
 		return new CategoryDTO(saved.getId(), saved.getTitle(), saved.getDescription());
 	}
 

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,9 +27,6 @@ public class Customer {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "TYPE", unique = false, nullable = true)
-	private String type;
-
 	@Column(name = "FIRST_NAME", unique = false, nullable = false)
 	private String firstName;
 
@@ -46,4 +45,8 @@ public class Customer {
 	@Column(name = "GENDER", unique = false, nullable = true)
 	private String gender;
 
+	@OneToOne
+	@JoinColumn(name = "AUTH_ID")
+	private UserCredentials auth;
+	
 }

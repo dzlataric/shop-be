@@ -1,4 +1,4 @@
-package com.shop.web.service.controller;
+package com.shop.web.controller;
 
 import javax.inject.Inject;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shop.web.dto.CustomerDTO;
 import com.shop.web.service.CustomerService;
-import com.shop.web.service.dto.CustomerDTO;
 
 @RestController
 @RequestMapping(value = CustomersController.BASE_REQUEST_MAPPING)
@@ -23,14 +23,16 @@ public class CustomersController {
 	private CustomerService customerService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	private ResponseEntity<CustomerDTO> createCustomer(@RequestBody final CustomerDTO customer) {
-		return new ResponseEntity<CustomerDTO>(customerService.insert(customer), HttpStatus.OK);
+	private ResponseEntity<String> createCustomer(@RequestBody final CustomerDTO customer) {
+		customerService.insert(customer);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	private ResponseEntity<CustomerDTO> updateCustomer(@PathVariable(value = "id") final Long id,
+	private ResponseEntity<String> updateCustomer(@PathVariable(value = "id") final Long id,
 			@RequestBody final CustomerDTO customer) {
-		return new ResponseEntity<CustomerDTO>(customerService.update(id, customer), HttpStatus.OK);
+		customerService.update(id, customer);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

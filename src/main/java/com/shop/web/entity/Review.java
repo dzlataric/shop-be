@@ -1,5 +1,7 @@
 package com.shop.web.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.springframework.data.domain.Persistable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,9 +24,9 @@ import lombok.experimental.Wither;
 @AllArgsConstructor
 @Entity
 @Table(name = "REVIEW")
-public class Review implements Persistable<Long> {
+public class Review implements Serializable {
 
-	private static final long serialVersionUID = -198087283540830658L;
+	private static final long serialVersionUID = -1975462684190181039L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +40,7 @@ public class Review implements Persistable<Long> {
 	private Integer rating;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "PRODUCT_ID")
-	private Product product;
-
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
+	@JoinColumn(name = "PRODUCT_DETAILS_ID")
+	private ProductDetails productDetails;
 
 }

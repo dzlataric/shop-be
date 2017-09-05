@@ -1,7 +1,8 @@
-package com.shop.web.service.controller;
+package com.shop.web.controller;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
@@ -10,12 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shop.web.dto.ProductDTO;
+import com.shop.web.dto.ReviewDTO;
 import com.shop.web.service.ProductsService;
 import com.shop.web.service.ReviewsService;
-import com.shop.web.service.dto.ProductDTO;
-import com.shop.web.service.dto.ReviewDTO;
 
 @RestController
 @RequestMapping(value = ProductsController.BASE_REQUEST_MAPPING)
@@ -29,8 +31,9 @@ public class ProductsController {
 	private ReviewsService reviewsService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	private ResponseEntity<List<ProductDTO>> findAllProducts() {
-		return new ResponseEntity<List<ProductDTO>>(productsService.getProducts(), HttpStatus.OK);
+	private ResponseEntity<List<ProductDTO>> findAllProducts(@RequestParam final int page,
+			@RequestParam final int pageSize, @Nullable @RequestParam final String search) {
+		return new ResponseEntity<List<ProductDTO>>(productsService.getProducts(page, pageSize, search), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)

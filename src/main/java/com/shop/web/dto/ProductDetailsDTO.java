@@ -16,6 +16,6 @@ public class ProductDetailsDTO {
 	private String manufacturer;
 	private Long productionYear;
 	private Date expiryDate;
-	private byte[] image;
+	private String image;
 	
 }

@@ -1,11 +1,9 @@
 package com.shop.web.service;
 
-import com.shop.web.entity.CustomerOrder;
+import com.shop.web.dto.OrderDTO;
 
 public interface OrderService {
 
-	void insert(CustomerOrder order);
-	
-	void delete(Long id);
+	void insert(OrderDTO order);
 	
 }

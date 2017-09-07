@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.web.dto.ProductDTO;
+import com.shop.web.dto.ProductDetailsDTO;
 import com.shop.web.dto.ReviewDTO;
 import com.shop.web.service.ProductsService;
 import com.shop.web.service.ReviewsService;
@@ -35,7 +36,12 @@ public class ProductsController {
 			@RequestParam final int pageSize, @Nullable @RequestParam final String search) {
 		return new ResponseEntity<List<ProductDTO>>(productsService.getProducts(page, pageSize, search), HttpStatus.OK);
 	}
-	
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	private ResponseEntity<ProductDetailsDTO> findProductDetails(@PathVariable(value = "id") final Long id) {
+		return new ResponseEntity<ProductDetailsDTO>(productsService.getProductDetails(id), HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	private ResponseEntity<ProductDTO> createProduct(@RequestBody final ProductDTO product) {
 		return new ResponseEntity<ProductDTO>(productsService.insert(product), HttpStatus.OK);
@@ -52,7 +58,7 @@ public class ProductsController {
 		productsService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/reviews", method = RequestMethod.POST)
 	private ResponseEntity<ReviewDTO> createProductReview(@RequestBody final ReviewDTO review) {
 		return new ResponseEntity<ReviewDTO>(reviewsService.insert(review), HttpStatus.OK);

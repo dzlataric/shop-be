@@ -49,7 +49,7 @@ public class ProductDetails implements Serializable {
 	private Date expiryDate;
 
 	@Column(name = "IMAGE", unique = false, nullable = true)
-	private byte[] image;
+	private String image;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productDetails", cascade = CascadeType.ALL)
 	private Set<Review> reviews = new HashSet<Review>();

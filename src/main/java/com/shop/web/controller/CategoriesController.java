@@ -26,6 +26,7 @@ public class CategoriesController {
 	@Inject
 	private CategoryService categoryService;
 
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	private ResponseEntity<List<CategoryDTO>> findAllCategories(@RequestParam final int page,
 			@RequestParam final int pageSize, @Nullable @RequestParam final String search) {

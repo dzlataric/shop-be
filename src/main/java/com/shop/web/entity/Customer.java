@@ -1,20 +1,27 @@
 package com.shop.web.entity;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Wither;
 
 @Getter
+@Setter
 @Wither
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,11 +34,20 @@ public class Customer {
 	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "USERNAME", unique = true, nullable = false)
+	private String username;
+
+	@Column(name = "PASSWORD", nullable = false)
+	private String password;
+
 	@Column(name = "FIRST_NAME", unique = false, nullable = false)
 	private String firstName;
 
 	@Column(name = "LAST_NAME", unique = false, nullable = false)
 	private String lastName;
+
+	@Column(name = "EMAIL", unique = false, nullable = false)
+	private String email;
 
 	@Column(name = "ADDRESS", unique = false, nullable = true)
 	private String address;
@@ -42,11 +58,16 @@ public class Customer {
 	@Column(name = "COUNTRY", unique = false, nullable = true)
 	private String country;
 
-	@Column(name = "GENDER", unique = false, nullable = true)
-	private String gender;
+	@Column(name = "ENABLED")
+	private Boolean enabled;
 
-	@OneToOne
-	@JoinColumn(name = "AUTH_ID")
-	private UserCredentials auth;
-	
+	@Column(name = "LASTPASSWORDRESETDATE")
+	private Date lastPasswordResetDate;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "USER_AUTHORITY", joinColumns = {
+			@JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID") })
+	private List<Authority> authorities;
+
 }

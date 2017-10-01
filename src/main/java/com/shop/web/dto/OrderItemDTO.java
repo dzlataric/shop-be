@@ -1,7 +1,5 @@
 package com.shop.web.dto;
 
-import java.util.Map;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDTO {
+public class OrderItemDTO {
 
-	private Map<Long, Integer> productIdsWithAmmount;
-	
+	private Long productId;
+	private Integer amount;
+
 }

@@ -1,7 +1,6 @@
 package com.shop.web.entity;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -42,5 +41,5 @@ public class CustomerOrder {
 	private Customer customer;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
-	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
+	private Set<OrderDetails> orderDetails;
 }

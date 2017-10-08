@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.shop.web.dto.ProductDTO;
 import com.shop.web.dto.ProductDetailsDTO;
+import com.shop.web.entity.Product;
 import com.shop.web.entity.ProductDetails;
 import com.shop.web.repository.ProductDetailsRepository;
 import com.shop.web.repository.ProductRepository;
@@ -35,8 +36,10 @@ public class ProductsServiceImpl implements ProductsService {
 
 	@Override
 	public ProductDetailsDTO getProductDetails(Long productId) {
+		Product product = productRepository.findOne(productId);
 		ProductDetails details = productDetailsRepository.findByProductId(productId);
-		return new ProductDetailsDTO(details.getId(), details.getCountryOfOrigin(), details.getManufacturer(),
+		return new ProductDetailsDTO(details.getId(), product.getName(), product.getStock(), product.getPrice(),
+				product.getCategory().getTitle(), details.getCountryOfOrigin(), details.getManufacturer(),
 				details.getProductionYear(), details.getExpiryDate(), details.getImage());
 	}
 

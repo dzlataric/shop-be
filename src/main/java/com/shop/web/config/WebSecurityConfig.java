@@ -1,4 +1,4 @@
-package com.shop.web.config;
+/*package com.shop.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -69,4 +69,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // disable page caching
         httpSecurity.headers().cacheControl();
     }
-}
+}*/

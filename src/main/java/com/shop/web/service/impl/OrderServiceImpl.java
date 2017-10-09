@@ -41,4 +41,9 @@ public class OrderServiceImpl implements OrderService {
 		orderRepository.save(customerOrder.withOrderDetails(orderDetails));
 	}
 
+	@Override
+	public List<CustomerOrder> findAllOrdersInPeriod(Date from, Date to) {
+		return orderRepository.findAll();
+	}
+
 }

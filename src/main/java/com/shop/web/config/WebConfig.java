@@ -20,16 +20,9 @@ public class WebConfig {
 		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins(
-						"http://localhost:4200")/*
-												 * .allowedMethods("GET",
-												 * "POST", "PUT", "DELETE",
-												 * "OPTIONS") .allowedHeaders(
-												 * "Access-Control-Allow-Origin",
-												 * "Access-Control-Max-Age",
-												 * "Access-Control-Max-Age",
-												 * "Authorization", "Accept")
-												 */;
+				registry.addMapping("/**")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+						.allowedHeaders("*");
 			}
 		};
 	}

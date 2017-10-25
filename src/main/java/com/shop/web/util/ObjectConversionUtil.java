@@ -17,7 +17,7 @@ public class ObjectConversionUtil {
 	
 	public static ProductDTO convertProductToDTO(final Product product) {
 		return new ProductDTO(product.getId(), product.getName(), product.getStock(), product.getPrice(),
-				product.getCategory().getTitle(), product.getCategory().getId(), product.getProductDetails().getId());
+				product.getCategory().getTitle(), product.getCategory().getId(), product.getProductDetails().getId(), null, null, null, null, null);
 	}
 	
 }

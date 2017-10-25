@@ -1,7 +1,5 @@
 package com.shop.web.dto;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +17,7 @@ public class ProductDetailsDTO {
 	private String country;
 	private String manufacturer;
 	private Long productionYear;
-	private Date expiryDate;
+	private String expiryDate;
 	private String image;
 
 }

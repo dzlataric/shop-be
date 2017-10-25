@@ -49,11 +49,8 @@ public class ProductDetails implements Serializable {
 	private Date expiryDate;
 
 	@Column(name = "IMAGE", unique = false, nullable = true)
-	private String image;
+	private String imageUrl;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productDetails", cascade = CascadeType.ALL)
-	private Set<Review> reviews = new HashSet<Review>();
-	
 	@OneToOne(mappedBy = "productDetails")
 	private Product product;
 	
